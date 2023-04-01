@@ -31,10 +31,10 @@ public class Pessoa {
     @NotNull
     @Column(nullable = false, name="data_nascimento")
     @Temporal(TemporalType.DATE)
-    private LocalDate dataNascimento;
+    private LocalDate datanascimento;
 
     @NotNull
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("pessoa")
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Endereco> enderecos = new ArrayList<>();
 }

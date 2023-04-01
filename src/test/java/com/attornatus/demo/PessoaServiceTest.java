@@ -66,6 +66,9 @@ public class PessoaServiceTest {
         Pessoa pessoa = new Pessoa();
         pessoa.setId(1);
         pessoa.setNome("João");
+        String date = "1999-05-31";
+        LocalDate data = LocalDate.parse(date);
+        pessoa.setDatanascimento(data);
         when(repositoryPessoa.save(pessoa)).thenReturn(pessoa);
 
 
@@ -105,6 +108,9 @@ public class PessoaServiceTest {
         Pessoa pessoa = new Pessoa();
         pessoa.setId(1);
         pessoa.setNome("João");
+        String date = "1999-05-31";
+        LocalDate data = LocalDate.parse(date);
+        pessoa.setDatanascimento(data);
         when(repositoryPessoa.findById(1)).thenReturn(Optional.empty());
 
 
@@ -160,18 +166,18 @@ public class PessoaServiceTest {
 
 
         assertEquals("João da Silva", pessoaAtualizada.getNome());
-        assertEquals(LocalDate.of(1990, 5, 20), pessoaAtualizada.getDataNascimento());
+        assertEquals(LocalDate.of(1990, 5, 20), pessoaAtualizada.getDatanascimento());
         assertEquals(2, pessoaAtualizada.getEnderecos().size());
         assertEquals("Rua A", pessoaAtualizada.getEnderecos().get(0).getLogradouro());
         assertEquals(14, pessoaAtualizada.getEnderecos().get(0).getNumero());
-        assertEquals("123", pessoaAtualizada.getEnderecos().get(0).getCaixaPostal());
+        assertEquals("123", pessoaAtualizada.getEnderecos().get(0).getCaixapostal());
         assertEquals("São Paulo", pessoaAtualizada.getEnderecos().get(0).getCidade());
-        assertEquals(EnderecoEnum.PADRÃO, pessoaAtualizada.getEnderecos().get(0).getTipoEndereco());
+        assertEquals(EnderecoEnum.PADRÃO, pessoaAtualizada.getEnderecos().get(0).getTipoendereco());
         assertEquals("Rua B", pessoaAtualizada.getEnderecos().get(1).getLogradouro());
         assertEquals(0, pessoaAtualizada.getEnderecos().get(1).getNumero());
-        assertEquals("456", pessoaAtualizada.getEnderecos().get(1).getCaixaPostal());
+        assertEquals("456", pessoaAtualizada.getEnderecos().get(1).getCaixapostal());
         assertEquals("São Paulo", pessoaAtualizada.getEnderecos().get(1).getCidade());
-        assertEquals(EnderecoEnum.SECUNDÁRIO, pessoaAtualizada.getEnderecos().get(1).getTipoEndereco());
+        assertEquals(EnderecoEnum.SECUNDÁRIO, pessoaAtualizada.getEnderecos().get(1).getTipoendereco());
         verify(repositoryPessoa, times(1)).findById(1);
         verify(repositoryEndereco, times(2)).save(any(Endereco.class));
         verify(repositoryPessoa, times(1)).save(any(Pessoa.class));

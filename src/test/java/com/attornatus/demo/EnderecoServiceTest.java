@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Optional.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -42,13 +41,13 @@ public class EnderecoServiceTest {
         endereco1.setLogradouro("Rua A");
         endereco1.setNumero(10);
         endereco1.setCidade("São Paulo");
-        endereco1.setTipoEndereco(EnderecoEnum.PADRÃO);
+        endereco1.setTipoendereco(EnderecoEnum.PADRÃO);
         Endereco endereco2 = new Endereco();
         endereco2.setId(2);
         endereco2.setLogradouro("Rua B");
         endereco2.setNumero(20);
         endereco2.setCidade("São Paulo");
-        endereco1.setTipoEndereco(EnderecoEnum.SECUNDÁRIO);
+        endereco1.setTipoendereco(EnderecoEnum.SECUNDÁRIO);
         List<Endereco> enderecos = new ArrayList<>();
         enderecos.add(endereco1);
         enderecos.add(endereco2);
@@ -78,13 +77,13 @@ public class EnderecoServiceTest {
         endereco1.setLogradouro("Rua A");
         endereco1.setNumero(10);
         endereco1.setCidade("São Paulo");
-        endereco1.setTipoEndereco(EnderecoEnum.PADRÃO);
+        endereco1.setTipoendereco(EnderecoEnum.PADRÃO);
         Endereco endereco2 = new Endereco();
         endereco2.setId(2);
         endereco2.setLogradouro("Rua B");
         endereco2.setNumero(20);
         endereco2.setCidade("Igarassu");
-        endereco1.setTipoEndereco(EnderecoEnum.SECUNDÁRIO);
+        endereco1.setTipoendereco(EnderecoEnum.SECUNDÁRIO);
         List<Endereco> enderecos = new ArrayList<>();
         enderecos.add(endereco1);
         enderecos.add(endereco2);

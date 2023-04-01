@@ -1,6 +1,7 @@
 package com.attornatus.demo.models;
 
 import com.attornatus.demo.enums.EnderecoEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,7 +29,7 @@ public class Endereco {
 
     @NotBlank
     @Column(nullable = false, name = "caixa_postal")
-    private String caixaPostal;
+    private String caixapostal;
 
     @Positive
     @Column(nullable = false, name = "numero")
@@ -39,10 +40,11 @@ public class Endereco {
     private String cidade;
 
     @NotNull
-    private EnderecoEnum tipoEndereco;
+    @Column(nullable = false, name = "tipoendereco")
+    private EnderecoEnum tipoendereco;
 
     @ManyToOne
     @JoinColumn(name = "pessoa_id")
-    @JsonIgnoreProperties("enderecos")
+    @JsonBackReference
     private Pessoa pessoa;
 }

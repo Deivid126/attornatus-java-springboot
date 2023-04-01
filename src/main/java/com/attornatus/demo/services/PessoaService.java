@@ -9,6 +9,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -22,11 +24,15 @@ public class PessoaService {
     public Pessoa findPessoaById(int id)
     {
         return repositoryPessoa.findById(id)
-                .orElseThrow(() -> new PessoaNotFoundException("Pessoa não encontrada com Id: " + id));
+                .orElseThrow(() -> new PessoaNotFoundException(""));
+
+
     }
     public Pessoa savePessoa(Pessoa pessoa)
     {
 
+        LocalDate data = LocalDate.parse(pessoa.getDatanascimento().toString());
+        pessoa.setDatanascimento(data);
         return repositoryPessoa.save(pessoa);
 
     }
@@ -40,8 +46,11 @@ public class PessoaService {
     }
 
     public Pessoa atualizarPessoa(int id, Pessoa pessoaAtualizada) {
+        LocalDate data = LocalDate.parse(pessoaAtualizada.getDatanascimento().toString());
+        pessoaAtualizada.setDatanascimento(data);
+
         Pessoa pessoaExistente = repositoryPessoa.findById(id)
-                .orElseThrow(() -> new PessoaNotFoundException("Pessoa não encontrada com ID: " + id));
+                .orElseThrow(() -> new PessoaNotFoundException(""));
 
         List<Endereco> enderecos = pessoaExistente.getEnderecos();
         List<Endereco> enderecosAtualizados = pessoaAtualizada.getEnderecos();

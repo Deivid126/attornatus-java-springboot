@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class EnderecoService {
+
     @Autowired
     RepositoryPessoa repositoryPessoa;
     @Autowired
@@ -21,12 +23,12 @@ public class EnderecoService {
 
     public List<Endereco> saveEndereco(int id, List<Endereco> endereco) {
 
-        Pessoa pessoa = repositoryPessoa.findById(id)
-                .orElseThrow(() -> new PessoaNotFoundException("Pessoa não encontrada com Id: " + id));
+        Optional<Pessoa> pessoa = repositoryPessoa.findById(id);
+
 
         endereco.forEach(endereconew -> {
 
-            endereconew.setPessoa(pessoa);
+            endereconew.setPessoa(pessoa.get());
             repositoryEndereco.save(endereconew);
         });
 
@@ -34,9 +36,9 @@ public class EnderecoService {
     }
 
     public List<Endereco> listarAllEndereco(int id){
-        Pessoa pessoa = repositoryPessoa.findById(id).orElseThrow(()-> new PessoaNotFoundException("Pessoa não encontrada com Id:" + id));
+        Optional<Pessoa> pessoa = repositoryPessoa.findById(id);
 
-        List<Endereco> enderecos = pessoa.getEnderecos();
+        List<Endereco> enderecos = pessoa.get().getEnderecos();
 
         return enderecos;
     }
