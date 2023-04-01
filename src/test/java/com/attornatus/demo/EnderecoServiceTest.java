@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Optional.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -65,5 +66,41 @@ public class EnderecoServiceTest {
         assertEquals(2, result.size());
         assertEquals(pessoa, endereco1.getPessoa());
         assertEquals(pessoa, endereco2.getPessoa());
+    }
+    @Test
+    public void  shouldFindAll()
+    {
+        int id = 1;
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId(id);
+        Endereco endereco1 = new Endereco();
+        endereco1.setId(1);
+        endereco1.setLogradouro("Rua A");
+        endereco1.setNumero(10);
+        endereco1.setCidade("São Paulo");
+        endereco1.setTipoEndereco(EnderecoEnum.PADRÃO);
+        Endereco endereco2 = new Endereco();
+        endereco2.setId(2);
+        endereco2.setLogradouro("Rua B");
+        endereco2.setNumero(20);
+        endereco2.setCidade("Igarassu");
+        endereco1.setTipoEndereco(EnderecoEnum.SECUNDÁRIO);
+        List<Endereco> enderecos = new ArrayList<>();
+        enderecos.add(endereco1);
+        enderecos.add(endereco2);
+        pessoa.setEnderecos(enderecos);
+
+        when(repositoryPessoa.findById(id)).thenReturn(Optional.of(pessoa));
+
+
+
+        List<Endereco> enderecoList = enderecoService.listarAllEndereco(id);
+
+        verify(repositoryPessoa,times(1)).findById(id);
+
+
+        assertEquals(2, enderecoList.size());
+        assertEquals("São Paulo",enderecoList.get(0).getCidade());
+        assertEquals("Igarassu",enderecoList.get(1).getCidade());
     }
 }

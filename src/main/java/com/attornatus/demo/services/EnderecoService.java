@@ -7,10 +7,12 @@ import com.attornatus.demo.models.Pessoa;
 import com.attornatus.demo.repositories.RepositoryEnderecos;
 import com.attornatus.demo.repositories.RepositoryPessoa;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class EnderecoService {
     @Autowired
     RepositoryPessoa repositoryPessoa;
